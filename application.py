@@ -4,8 +4,8 @@ from wtforms import StringField,SubmitField,RadioField,TextAreaField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import InputRequired
 
-app=Flask(__name__)
-app.config['SECRET_KEY']='some_random_secret'
+application=Flask(__name__)
+application.config['SECRET_KEY']='some_random_secret'
 
 class SignUpForm(FlaskForm):
     name=StringField('Enter your Name',validators=[InputRequired()])
@@ -14,7 +14,7 @@ class SignUpForm(FlaskForm):
     feedback=TextAreaField('Anything else you want to tell us ?')
     submit=SubmitField('Submit')
 
-@app.route('/',methods=['GET','POST'])
+@application.route('/',methods=['GET','POST'])
 def hello_world():
 
     form = SignUpForm()
@@ -27,7 +27,7 @@ def hello_world():
         return redirect(url_for("thankyou"))
     return render_template('index.html',form=form)
 
-@app.route('/thankyou')
+@application.route('/thankyou')
 def thankyou():
  
     return render_template('thankyou.html')
